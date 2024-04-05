@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 class Node{
    int value;
    Node left, right;
@@ -46,11 +48,40 @@ class BinarySearchTree{
 
    
    
-   /*
-   in-order traversal
-   */
+   /**
+    * in-order traversal
+    * Done in the format of left ->node->right and saves the nodes popped
+    * and prints the solution
+    *
+    * @param root - the root of the tree
+    */
    public void inOrderTraversal(Node root){
-      //implement me
+      if (root == null){
+         System.out.println("The tree is empty");
+      }
+      String inOrder = "";
+      Stack<Node> s = new Stack<>();
+
+      s.push(root);
+      Node temp = root;
+
+      while(!s.isEmpty()) {
+
+         //Push to the left until null is found
+         if (temp != null) {
+            s.push(temp);
+            temp = temp.left;
+         } else {
+            // Add the temp value to the inorder string
+            temp = s.pop();
+            inOrder += temp.value + ", ";
+            //Go to the right
+            temp = temp.right;
+         }
+      }
+
+      //print out the inorder traversal
+      System.out.println(inOrder);
    }
    
    
@@ -81,6 +112,7 @@ class BinarySearchTree{
    */
    public int getMin(Node root){
       //implement me
+      return -1;
    }
   
   
@@ -91,6 +123,7 @@ class BinarySearchTree{
    */
    public int getMax(Node root){
 	  //implement me
+      return -1;
    }
    
    
@@ -136,8 +169,8 @@ class BinarySearchTree{
 public class TreeDemo{
    public static void main(String[] args){
       BinarySearchTree t1  = new BinarySearchTree();
+      t1.root = new Node(24);
 
-      t1.insert(t1.root,24);
       t1.insert(t1.root,80);
       t1.insert(t1.root,18);
       t1.insert(t1.root,9);
