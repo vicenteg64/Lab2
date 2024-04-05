@@ -136,12 +136,13 @@ class BinarySearchTree{
 public class TreeDemo{
    public static void main(String[] args){
       BinarySearchTree t1  = new BinarySearchTree();
-      t1.insert(24);
-      t1.insert(80);
-      t1.insert(18);
-      t1.insert(9);
-      t1.insert(90);
-      t1.insert(22);
+
+      t1.insert(t1.root,24);
+      t1.insert(t1.root,80);
+      t1.insert(t1.root,18);
+      t1.insert(t1.root,9);
+      t1.insert(t1.root,90);
+      t1.insert(t1.root,22);
             
       System.out.print("in-order :   ");
       t1.inOrderTraversal(t1.root);
