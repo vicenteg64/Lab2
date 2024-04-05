@@ -36,30 +36,22 @@ class BinarySearchTree{
       
       return root;
    }
-   
-   
-   
-   /*
-   pre-order traversal
-   */
-   public void preOrderTraversal(Node root){
-      //implement me
-   }
 
-   
-   
+
+
    /**
-    * in-order traversal
-    * Done in the format of left ->node->right and saves the nodes popped
-    * and prints the solution
+    * pre-order traversal
+    * Done in the format of node->left ->right and saves the nodes popped
+    * and prints the solution.
     *
     * @param root - the root of the tree
     */
-   public void inOrderTraversal(Node root){
+   public void preOrderTraversal(Node root){
+      //If tree is empty
       if (root == null){
          System.out.println("The tree is empty");
       }
-      String inOrder = "";
+      String preOrder = "";
       Stack<Node> s = new Stack<>();
 
       s.push(root);
@@ -70,8 +62,51 @@ class BinarySearchTree{
          //Push to the left until null is found
          if (temp != null) {
             s.push(temp);
+            // Add the node value to the preOrder String
+            preOrder += temp.value + ", ";
             temp = temp.left;
          } else {
+            //Pop the node that can't be visited left anymore
+            temp = s.pop();
+            //Go to the right
+            temp = temp.right;
+         }
+      }
+
+      //print out the inorder traversal
+      System.out.println(preOrder);
+   }
+
+   
+   
+   /**
+    * in-order traversal
+    * Done in the format of left ->node->right and saves the nodes popped
+    * and prints the solution.
+    *
+    * @param root - the root of the tree
+    */
+   public void inOrderTraversal(Node root){
+      //If tree is empty
+      if (root == null){
+         System.out.println("The tree is empty");
+      }
+      String inOrder = "";
+      Stack<Node> s = new Stack<>();
+
+      Node temp = root;
+
+      while(true) {
+
+         //Push to the left until null is found
+         if (temp != null) {
+
+            s.push(temp);
+            temp = temp.left;
+         } else {
+            //end while when stack is empty
+            if(s.isEmpty()){break;}
+
             // Add the temp value to the inorder string
             temp = s.pop();
             inOrder += temp.value + ", ";
@@ -83,9 +118,9 @@ class BinarySearchTree{
       //print out the inorder traversal
       System.out.println(inOrder);
    }
-   
-   
-   
+
+
+
    /*
    post-order traversal
    */
@@ -177,8 +212,12 @@ public class TreeDemo{
       t1.insert(t1.root,90);
       t1.insert(t1.root,22);
             
-      System.out.print("in-order :   ");
+      System.out.print("in-order : ");
       t1.inOrderTraversal(t1.root);
+      System.out.println();
+
+      System.out.print("pre-order :   ");
+      t1.preOrderTraversal(t1.root);
       System.out.println();
            
       
