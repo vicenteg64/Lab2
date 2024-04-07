@@ -181,17 +181,49 @@ class BinarySearchTree{
 
       System.out.println(postOrder);
    } // Method preOrderTraversal
-   
-   
-   
-   /*
-   a method to find the node in the tree
-   with a specific value
-   */
+
+
+   /**
+    * A method to find the node in the tree
+    * with a specific value and return a boolean
+    * value.
+    *
+    * @param root - the root of the tree
+    * @param key - the value being searched
+    *
+    * @return a boolean value if the key is found or not
+    */
    public boolean find(Node root, int key){
-	  //implement me
+      //If tree is empty
+      if (root == null){
+         System.out.println("The tree is empty");
+      }
+      String preOrder = "";
+      Stack<Node> s = new Stack<>();
+
+      s.push(root);
+      Node temp = root;
+
+      while(!s.isEmpty()) {
+
+         //Push to the left until null is found
+         if (temp != null) {
+            s.push(temp);
+            //check if the temp node and the key match
+            if (temp.value == key){
+               return true;
+            }
+            temp = temp.left;
+         } else {
+            //Pop the node that can't be visited left anymore
+            temp = s.pop();
+            //Go to the right
+            temp = temp.right;
+         }
+      } // while
+
       return false;           
-   }
+   } // Method find
    
    
    
@@ -277,6 +309,11 @@ public class TreeDemo{
       System.out.print("post-order :   ");
       t1.postOrderTraversal(t1.root);
       System.out.println();
+
+      System.out.println("Is the key 9 in the tree: " + t1.find(t1.root,9));
+      System.out.println("Is the key 33 in the tree: " + t1.find(t1.root,33));
+
+
            
       
    }  
