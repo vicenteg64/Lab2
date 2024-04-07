@@ -224,17 +224,33 @@ class BinarySearchTree{
 
       return false;           
    } // Method find
-   
-   
-   
-   /*
-   a method to find the node in the tree
-   with a smallest key
-   */
+
+
+   /**
+    * A method to find the node in the tree
+    * the smallest key.
+    *
+    * @param root - the root of the tree
+    *
+    * @return An int value of the smallest key.
+    */
    public int getMin(Node root){
-      //implement me
-      return -1;
-   }
+      //If tree is empty
+      if (root == null){
+         System.out.println("The tree is empty");
+      }
+
+      Node temp = root;
+
+      // Go all the way left to find the min node
+      while(temp.left != null){
+
+         temp = temp.left;
+      } // while
+
+      return temp.value;
+   } // Method getMin
+
   
   
   
@@ -297,7 +313,8 @@ public class TreeDemo{
       t1.insert(t1.root,9);
       t1.insert(t1.root,90);
       t1.insert(t1.root,22);
-            
+
+      //Test the traversal methods
       System.out.print("in-order : ");
       t1.inOrderTraversal(t1.root);
       System.out.println();
@@ -310,8 +327,13 @@ public class TreeDemo{
       t1.postOrderTraversal(t1.root);
       System.out.println();
 
+      //Test the find method
       System.out.println("Is the key 9 in the tree: " + t1.find(t1.root,9));
       System.out.println("Is the key 33 in the tree: " + t1.find(t1.root,33));
+      System.out.println();
+
+      //Test GetMin and getMax methods
+      System.out.println("The smallest key in the tree is " + t1.getMin(t1.root));
 
 
            
