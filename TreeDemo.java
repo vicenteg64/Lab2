@@ -71,7 +71,7 @@ class BinarySearchTree{
             //Go to the right
             temp = temp.right;
          }
-      }
+      } // while
 
       //print out the inorder traversal
       System.out.println(preOrder);
@@ -113,7 +113,7 @@ class BinarySearchTree{
             //Go to the right
             temp = temp.right;
          }
-      }
+      } // while
 
       //print out the inorder traversal
       System.out.println(inOrder);
@@ -121,12 +121,66 @@ class BinarySearchTree{
 
 
 
-   /*
-   post-order traversal
-   */
+   /**
+    * post-order traversal
+    * Done in the format of left->right->node and saves the nodes popped
+    * and prints the solution. This implementation uses 2 stacks one for the
+    * nodes visited and the other to count the amount of times a node has been
+    * visited.
+    *
+    * @param root - the root of the tree
+    */
    public void postOrderTraversal(Node root){
-      //implement me
-   }
+      //If tree is empty
+      if (root == null){
+         System.out.println("The tree is empty");
+      }
+
+      String postOrder = "";
+      Stack<Node> s = new Stack<>();
+      Stack<Integer> sCounter = new Stack<>();
+      Node temp = root;
+
+      s.push(temp);
+      sCounter.push(1);
+
+      while(!s.isEmpty()) {
+
+         //keep track of the amount of times a node has been visited
+         int counter = sCounter.pop();
+         temp = s.peek(); //retrieve value but don't remove
+
+         if (counter == 1) { // first visit
+
+            sCounter.push(2); // mark for second visit
+
+            //Push to the left until null is found
+            if (temp.left != null) {
+
+               sCounter.push(1); // Mark as first visit
+               s.push(temp.left); // push into the stack
+            }
+
+         } else if (counter == 2) { // second visit
+
+            sCounter.push(3); // Mark for third visit
+
+            if (temp.right != null) {
+               sCounter.push(1);// Mark first visit
+               s.push(temp.right);// push the node onto the stack
+            }
+
+         } else { // third visit
+
+               //Pop the node that can't been visited 3 times
+               s.pop();
+               //Add the value to postOrder String
+               postOrder += temp.value + ", ";
+         }
+      } // while
+
+      System.out.println(postOrder);
+   } // Method preOrderTraversal
    
    
    
@@ -218,6 +272,10 @@ public class TreeDemo{
 
       System.out.print("pre-order :   ");
       t1.preOrderTraversal(t1.root);
+      System.out.println();
+
+      System.out.print("post-order :   ");
+      t1.postOrderTraversal(t1.root);
       System.out.println();
            
       
