@@ -238,6 +238,8 @@ class BinarySearchTree{
       //If tree is empty
       if (root == null){
          System.out.println("The tree is empty");
+
+         return -1;
       }
 
       Node temp = root;
@@ -251,17 +253,35 @@ class BinarySearchTree{
       return temp.value;
    } // Method getMin
 
-  
-  
-  
-   /*
-   a method to find the node in the tree
-   with a largest key
-   */
+
+
+
+   /**
+    * A method to find the node in the tree
+    * the largest key.
+    *
+    * @param root - the root of the tree
+    *
+    * @return An int value of the largest key.
+    */
    public int getMax(Node root){
-	  //implement me
-      return -1;
-   }
+      //If tree is empty
+      if (root == null){
+         System.out.println("The tree is empty");
+
+         return -1;
+      }
+
+      Node temp = root;
+
+      // Go all the way right to find the min node
+      while(temp.right != null){
+
+         temp = temp.right;
+      } // while
+
+      return temp.value;
+   } // Method getMax
    
    
    
@@ -334,9 +354,7 @@ public class TreeDemo{
 
       //Test GetMin and getMax methods
       System.out.println("The smallest key in the tree is " + t1.getMin(t1.root));
+      System.out.println("The largest key in the tree is " + t1.getMax(t1.root));
 
-
-           
-      
-   }  
+   } // main
 }
